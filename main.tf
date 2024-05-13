@@ -14,7 +14,7 @@ data "aws_ami" "app_ami" {
   owners = ["979382823631"] # Bitnami
 }
 
-date "aws_vpc" "default" {
+data "aws_vpc" "default" {
   default = true
 }
 
