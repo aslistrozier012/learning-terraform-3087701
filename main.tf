@@ -53,7 +53,7 @@ module "alb" {
 
   name    = "blog-alb"
 
-  load_balance_type = "application"
+  load_balancer_type = "application"
 
   vpc_id  = module.blog_vpc.vpc_id
   subnets = module.blog_vpc.public_subnets
@@ -71,14 +71,6 @@ module "alb" {
           port = 80
         }
       }
-    }
-  ]
-
-   http_tcp_listeners = [
-    {
-      port = 80
-      protocol = "HTTP"
-      target_group_index = 0
     }
   ]
 
