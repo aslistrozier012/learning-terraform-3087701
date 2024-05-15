@@ -124,7 +124,7 @@ module "blog_db" {
   subnet_ids             = [module.blog_vpc.public_subnets]
 
   # DB parameter group
-  family = ""sqlserver-ex-15.0""
+  family = "sqlserver-ex-15.0"
 
   # DB option group
   major_engine_version = "15.00"
