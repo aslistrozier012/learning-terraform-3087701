@@ -96,3 +96,41 @@ module "blog_sg" {
   egress_rules       = ["all-all"]
   egress_cidr_blocks = ["0.0.0.0/0"]
 }
+
+module "blog_db" {
+  source  = "terraform-aws-modules/rds/aws"
+  version = "6.6.0"
+
+  identifier = "mssql-instance"
+
+  engine            = "sqlserver-ex"
+  engine_version    = "15.00"
+  instance_class    = "db.t3.micro"
+  allocated_storage = 20
+
+  db_name  = "terraform-test"
+  username = "user"
+  password = "password"
+  port     = "1433"
+
+
+  vpc_security_group_ids = [module.blog_sg.security_group_id]
+
+
+  tags = {
+    Environment = var.environment.name
+  }
+
+  subnet_ids             = [module.blog_vpc.public_subnets]
+
+  # DB parameter group
+  family = ""sqlserver-ex-15.0""
+
+  # DB option group
+  major_engine_version = "15.00"
+
+  # Database Deletion Protection
+  deletion_protection = false
+
+ 
+}
